@@ -1,29 +1,29 @@
-from flask import Flask, request, jsonify
-from sentence_transformers import SentenceTransformer
 import chromadb
 import os
+import json
+import logging
+from flask import Flask, request, jsonify
+from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
 from groq import Groq
-import json
 from config.utils import get_env_value
 
-# Load environment variables
+logging.basicConfig(level=logging.INFO) 
+logger = logging.getLogger(__name__)
+
 load_dotenv()
 
-# Initialize Flask app
 app = Flask(__name__)
 
-# Load embedding model
 model = SentenceTransformer('intfloat/multilingual-e5-large-instruct')
-
-# Initialize ChromaDB
 chroma_client = chromadb.PersistentClient(path="./chroma_db_poc_v2")
 collection = chroma_client.get_collection(name="paper_data")
-
-# Initialize GROQ API
+logger.info("BEFORE FETCH API KEY")
 groq_api_key = get_env_value("GROQ_API_KEY")
+logger.info("AFTER FETCH API KEY")
+groq_client = Groq(api_key=get_env_value("GROQ_API_KEY"))
+logger.info("AFTER FETCH GROQ")
 
-groq_client = Groq(api_key=groq_api_key)
 
 def get_embedding(query):
     """Generate embedding for the given query."""
