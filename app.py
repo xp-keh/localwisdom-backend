@@ -19,10 +19,14 @@ model = SentenceTransformer('intfloat/multilingual-e5-large-instruct')
 chroma_client = chromadb.PersistentClient(path="./chroma_db_poc_v2")
 collection = chroma_client.get_collection(name="paper_data")
 logger.info("BEFORE FETCH API KEY")
-groq_api_key = get_env_value("GROQ_API_KEY")
+groq_api_key = os.environ.get("GROQ_API_KEY")
 logger.info("AFTER FETCH API KEY")
-groq_client = Groq(api_key=get_env_value("GROQ_API_KEY"))
-logger.info("AFTER FETCH GROQ")
+
+if not groq_api_key:
+    raise RuntimeError("GROQ_API_KEY environment variable not set")
+
+
+groq_client = Groq(api_key=groq_api_key)
 
 
 def get_embedding(query):
