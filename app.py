@@ -6,7 +6,6 @@ from flask import Flask, request, jsonify
 from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
 from groq import Groq
-from config.utils import get_env_value
 
 logging.basicConfig(level=logging.INFO) 
 logger = logging.getLogger(__name__)
