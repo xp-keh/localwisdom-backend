@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 from groq import Groq
 import json
+from config.utils import get_env_value
 
 # Load environment variables
 load_dotenv()
@@ -20,7 +21,9 @@ chroma_client = chromadb.PersistentClient(path="./chroma_db_poc_v2")
 collection = chroma_client.get_collection(name="paper_data")
 
 # Initialize GROQ API
-groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+groq_api_key = get_env_value("GROQ_API_KEY")
+
+groq_client = Groq(api_key=groq_api_key)
 
 def get_embedding(query):
     """Generate embedding for the given query."""

@@ -1,8 +1,14 @@
 version: "3.8"
 
 services:
-  backend:
+  localwisdom_backend:
     build: .
+    pull_policy: build
+    container_name: localwisdom_backend
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+    ports:
+      - "5050:5050"
     restart: always
     networks:
       data-station-network:
