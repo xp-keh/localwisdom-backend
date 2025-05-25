@@ -10,7 +10,7 @@ services:
     ports:
       - "5050:5050"
     restart: always
-    command: gunicorn app:app --host 0.0.0.0 --port 5050
+    command: gunicorn app:app --bind 0.0.0.0:5050
     networks:
       data-station-network:
         ipv4_address: 172.20.14.97
