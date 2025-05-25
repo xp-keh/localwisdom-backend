@@ -8,3 +8,7 @@ services:
     networks:
       data-station-network:
         ipv4_address: 172.20.14.97
+
+  networks:
+    data-station-network:
+      external: true
