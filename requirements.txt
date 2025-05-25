@@ -1,0 +1,7 @@
+groq
+transformers
+Flask
+sentence-transformers
+python-dotenv
+chromadb
+gunicorn
