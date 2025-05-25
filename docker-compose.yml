@@ -2,8 +2,7 @@ version: "3.8"
 
 services:
   backend:
-    build:
-      context: ./backend
+    build: .
     restart: always
     networks:
       data-station-network:
