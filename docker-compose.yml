@@ -12,9 +12,9 @@ services:
     restart: always
     command: gunicorn app:app --bind 0.0.0.0:5050
     networks:
-      data-station-network:
-        ipv4_address: 172.20.14.97
+      nginx-manager_customnetwork:
+        ipv4_address: 172.20.0.134
 
 networks:
-  data-station-network:
+  nginx-manager_customnetwork:
     external: true
