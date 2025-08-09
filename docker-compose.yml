@@ -4,7 +4,7 @@ services:
   localwisdom_backend:
     build: .
     pull_policy: build
-    container_name: localwisdom_backend
+    container_name: localwisdom-backend
     environment:
       - GROQ_API_KEY=${GROQ_API_KEY}
     ports:
